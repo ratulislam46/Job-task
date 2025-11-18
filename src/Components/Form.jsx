@@ -58,12 +58,12 @@ const From = () => {
     // console.log(users)
 
     return (
-        <div>
-            <div className='max-w-xl mx-auto my-10 shadow p-6 rounded-xl bg-white'>
+        <div className='mx-2 md:mx-0'>
+            <div className='max-w-xl mx-auto my-10 shadow p-6 rounded-xl bg-white hover:border hover:border-emerald-400'>
                 <form onSubmit={handleSubmit(handleForm)} className='space-y-4'>
 
                     {fields.map((field, index) => (
-                        <div key={index} className="flex gap-4 mb-2 items-center">
+                        <div key={index} className="grid grid-cols-3 gap-3 md:gap-4 mb-2 items-center">
                             {/* Name input */}
                             <input
                                 type="text"
@@ -71,8 +71,8 @@ const From = () => {
                                 placeholder="Enter name"
                                 value={field.name}
                                 onChange={(e) => handleChange(index, e)}
-                                {...register('name', { required: "Name is required" })}
-                                className="flex-1 border border-gray-400 p-2 rounded-xl"
+                                className="border border-gray-400 p-2 rounded-xl"
+                                required
 
                             />
                             {errors.name && <p className="text-red-500 text-sm">{errors.name?.message}</p>}
@@ -82,8 +82,8 @@ const From = () => {
                                 name="role"
                                 value={field.role}
                                 onChange={(e) => handleChange(index, e)}
-                                className="flex-1 border border-gray-400 p-2 rounded-xl"
-                                {...register("role", { required: "Role is required" })}
+                                className=" border border-gray-400 p-2 rounded-xl"
+                                required
                             >
                                 <option value="">Select Role</option>
                                 <option value="developer">Developer</option>
@@ -112,7 +112,7 @@ const From = () => {
                         <button
                             type="button"
                             onClick={addField}
-                            className='px-2 border-2 border-green-500 bg-green-400 hover:bg-green-500 rounded-2xl cursor-pointer text-xl mb-4'
+                            className='px-2 border-2 border-green-500 bg-green-400 hover:bg-green-500 rounded-2xl cursor-pointer text-xl'
                         >
                             +
                         </button>
