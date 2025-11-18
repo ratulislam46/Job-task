@@ -1,23 +1,21 @@
 import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 
 const From = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors },reset } = useForm();
 
-    const handleForm = (data) => {
+    const handleForm = async (data) => {
         console.log(data);
 
-        // Save data in Database 
-        axios.post('http://localhost:3000/users-data', data)
-            .then(res => {
-                toast.success("Submit successfully");
-            })
-            .catch(error => {
-                console.log('error', error);
-                toast.error("Failed to submit data");
-            });
+        try {
+            const res = await axios.post("/applied-trainers", data);
+            if (res.data.insertedId) {
+                reset();
+            }
+        } catch (err) {
+            console.error("Submission error:", err);
+        }
     }
 
     return (
